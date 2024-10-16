@@ -48,6 +48,25 @@ class GdprManager extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $enableBackgroundImage = 0;
 
+    /**
+     * headingColor
+     *
+     * @var string
+     */
+    protected $headingColor = '';
+
+    /**
+     * baseUrl
+     *
+     * @var string
+     */
+    protected $baseUrl = '';
+    /**
+     * enableBackgroundImage
+     *
+     * @var int
+     */
+    protected $siteId = '';
 
     /**
      * backgroundImage
@@ -336,6 +355,26 @@ class GdprManager extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->enableBackgroundImage = $enableBackgroundImage;
     }
+    /**
+     * Returns the siteId
+     *
+     * @return int
+     */
+    public function getSiteId()
+    {
+        return $this->siteId;
+    }
+
+    /**
+     * Sets the siteId
+     *
+     * @param int $siteId
+     * @return void
+     */
+    public function setSiteId(int $siteId)
+    {
+        $this->siteId = $siteId;
+    }
 
     /**
      * Returns the backgroundImageColor
@@ -357,8 +396,47 @@ class GdprManager extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->backgroundImageColor = $backgroundImageColor;
     }
+    /**
+     * Returns the headingColor
+     *
+     * @return string
+     */
+    public function getHeadingColor()
+    {
+        return $this->headingColor;
+    }
 
+    /**
+     * Sets the headingColor
+     *
+     * @param string $headingColor
+     * @return void
+     */
+    public function setHeadingColor(string $headingColor)
+    {
+        $this->headingColor = $headingColor;
+    }
 
+    /**
+     * Returns the baseUrl
+     *
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
+    }
+
+    /**
+     * Sets the baseUrl
+     *
+     * @param string $baseUrl
+     * @return void
+     */
+    public function setBaseUrl(string $baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+    }
 
     /**
      * Returns the buttonColor

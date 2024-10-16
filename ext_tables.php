@@ -34,7 +34,7 @@ defined('TYPO3') || die();
                 'mt',
                 '',
                 [
-                    \GdprExtensionsCom\GdprExtensionsComMt\Controller\GdprManagerController::class => 'list,index, show, new, create, edit, update, delete,uploadImage',
+                    \GdprExtensionsCom\GdprExtensionsComMt\Controller\GdprManagerController::class => 'list,index, show, new, create, edit, editAdd, save, update, delete,uploadImage',
                     \GdprExtensionsCom\GdprExtensionsComMt\Controller\GdprExtensionsComMtController::class => 'list, index',
 
                 ],

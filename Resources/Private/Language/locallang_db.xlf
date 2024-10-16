@@ -52,10 +52,10 @@
 				<source>Cookie Widget Image</source>
 			</trans-unit>
 			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color">
-				<source>Background Image Color</source>
+				<source>Background Color</source>
 			</trans-unit>
 			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description">
-				<source>Background Image Color</source>
+				<source>Background Color</source>
 			</trans-unit>
 			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color">
 				<source>Button Color</source>

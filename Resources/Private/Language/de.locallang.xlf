@@ -168,11 +168,11 @@
 				<target>Hintergrundbild</target>
 			</trans-unit>
 			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color">
-				<source>Background Image Color</source>
+				<source>Background Color</source>
 				<target>Farbe des Hintergrundbilds</target>
 			</trans-unit>
 			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description">
-				<source>Background Image Color</source>
+				<source>Background Color</source>
 				<target>Farbe des Hintergrundbilds</target>
 			</trans-unit>
 			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color">
@@ -228,8 +228,10 @@
 				<target>DSGVO 2-KLICK COOKIE-ZUSTIMMUNG</target>
 			</trans-unit>
 			<trans-unit id="gdpr.twoclick.consent.desc" resname="gdpr.twoclick.consent.desc">
-				<source>Third-party advertising services are used. If you agree here, personal data will be transferred to these providers.</source>
-				<target>Drittanbieter-Werbedienste werden verwendet. Wenn Sie hier zustimmen, werden personenbezogene Daten an diese Anbieter übertragen.</target>
+				<source>Cookies provided by host are managed through the Matomo 2xClick solution developed by
+					gdpr-extensions.com </source>
+				<target>Die vom Host zur Verfügung gestellten Cookies werden über die von Matomo entwickelte
+					2xClick-Lösung verwaltet gdpr-extensions.com</target>
 			</trans-unit>
 			<trans-unit id="gdpr.accept.all" resname="gdpr.accept.all">
 				<source>Accept All</source>

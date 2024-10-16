@@ -244,6 +244,134 @@ class GdprManagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     }
 
     /**
+     * action save
+     * @param \GdprExtensionsCom\GdprExtensionsComMt\Domain\Model\GdprManager $gdprManager
+     */
+    public function saveAction(\GdprExtensionsCom\GdprExtensionsComMt\Domain\Model\GdprManager $gdprManager): \Psr\Http\Message\ResponseInterface
+    {
+
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('gdpr_tracking');
+        
+        // Check if the record with the given root_pid (siteId) already exists
+        $existingRecord = $queryBuilder
+            ->select('uid')
+            ->from('gdpr_tracking')
+            ->where(
+                $queryBuilder->expr()->eq('root_pid', $queryBuilder->createNamedParameter($gdprManager->getSiteId(), \PDO::PARAM_INT))
+            )
+            ->executeQuery()
+            ->fetchOne();
+
+        if ($existingRecord) {
+            // Record exists, so update it
+            $queryBuilder
+                ->update('gdpr_tracking')
+                ->where(
+                    $queryBuilder->expr()->eq('root_pid', $queryBuilder->createNamedParameter($gdprManager->getSiteId(), \PDO::PARAM_INT))
+                )
+                ->set('matomo_code', base64_encode($gdprManager->getMatomoCode()))
+                ->set('base_url', $gdprManager->getBaseUrl())
+                ->set('matomo_heading', $gdprManager->getHeading())
+                ->set('matomo_desc', $gdprManager->getContent())
+                ->set('matomo_button_text', $gdprManager->getButtonText())
+                ->set('matomo_enable_background_image', $gdprManager->getEnableBackgroundImage())
+                ->set('matomo_background_image', $gdprManager->getBackgroundImage())
+                ->set('matomo_background_image_color', $gdprManager->getBackgroundImageColor())
+                ->set('matomo_button_color', $gdprManager->getButtonColor())
+                ->set('matomo_button_text_color', $gdprManager->getButtonTextColor())
+                ->set('matomo_text_color', $gdprManager->getTextColor())
+                ->set('matomo_heading_color', $gdprManager->getHeadingColor())
+                ->set('matomo_button_shape', $gdprManager->getButtonShape())
+                ->set('extension_title', $gdprManager->getExtensionTitle())
+                ->set('extension_key', $gdprManager->getExtensionKey())
+                ->executeStatement();
+        } else {
+            // No existing record, so insert a new one
+            $queryBuilder
+                ->insert('gdpr_tracking')
+                ->values([
+                    'matomo_code' => base64_encode($gdprManager->getMatomoCode()),
+                    'root_pid' => $gdprManager->getSiteId(),
+                    'base_url' => $gdprManager->getBaseUrl(),
+                    'matomo_heading' => $gdprManager->getHeading(),
+                    'matomo_desc' => $gdprManager->getContent(),
+                    'matomo_button_text' => $gdprManager->getButtonText(),
+                    'matomo_enable_background_image' => $gdprManager->getEnableBackgroundImage(),
+                    'matomo_background_image' => $gdprManager->getBackgroundImage(),
+                    'matomo_background_image_color' => $gdprManager->getBackgroundImageColor(),
+                    'matomo_button_color' => $gdprManager->getButtonColor(),
+                    'matomo_button_text_color' => $gdprManager->getButtonTextColor(),
+                    'matomo_text_color' => $gdprManager->getTextColor(),
+                    'matomo_heading_color' => $gdprManager->getHeadingColor(),
+                    'matomo_button_shape' => $gdprManager->getButtonShape(),
+                    'extension_title' => $gdprManager->getExtensionTitle(),
+                    'extension_key' => $gdprManager->getExtensionKey(),
+                ])
+                ->executeStatement();
+        }
+       
+
+        return $this->redirect('editAdd', null, null, [
+            'id' => $gdprManager->getSiteId(), 
+            'url' => $gdprManager->getBaseUrl(), 
+            'gdprManager' => $gdprManager
+        ]);
+    }
+
+    /**
+     * action editAdd
+     *
+     * @param int $id
+     * @param string $url
+     * @param \GdprExtensionsCom\GdprExtensionsComMt\Domain\Model\GdprManager $gdprManager
+     */
+    public function editAddAction(int $id, string $url ,\GdprExtensionsCom\GdprExtensionsComMt\Domain\Model\GdprManager $gdprManager): \Psr\Http\Message\ResponseInterface
+    {
+        $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+        $sites = $siteFinder->getAllSites();
+        $configurations = [];
+
+        foreach ($sites as $siteKey => $site) {
+            $configurations[$siteKey] = $site->getConfiguration();
+        }
+        $uploadImageUrl = $this->uriBuilder->reset()
+            ->uriFor('uploadImage');
+        $this->view->assign('uploadImageUrl', $uploadImageUrl);
+
+
+
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('gdpr_tracking');
+            $result = $queryBuilder
+                ->select('*')
+                ->from('gdpr_tracking')
+                ->where(
+                    $queryBuilder->expr()->eq('root_pid', $queryBuilder->createNamedParameter($id, \PDO::PARAM_INT))
+                )
+                ->executeQuery()->fetchAssociative();
+        if ($result) {
+            $gdprManager->setMatomoCode(base64_decode($result['matomo_code']));
+            $gdprManager->setBaseUrl($result['base_url']);
+            $gdprManager->setSiteId($result['root_pid']);
+            $gdprManager->setHeading($result['matomo_heading']);
+            $gdprManager->setContent($result['matomo_desc']);
+            $gdprManager->setButtonText($result['matomo_button_text']);
+            $gdprManager->setEnableBackgroundImage($result['matomo_enable_background_image']);
+            $gdprManager->setBackgroundImage($result['matomo_background_image']);
+            $gdprManager->setBackgroundImageColor($result['matomo_background_image_color']);
+            $gdprManager->setButtonColor($result['matomo_button_color']);
+            $gdprManager->setButtonTextColor($result['matomo_button_text_color']);
+            $gdprManager->setTextColor($result['matomo_text_color']);
+            $gdprManager->setHeadingColor($result['matomo_heading_color']);
+            $gdprManager->setButtonShape($result['matomo_button_shape']);
+            $gdprManager->setExtensionTitle($result['extension_title']);
+            $gdprManager->setExtensionKey($result['extension_key']);
+        }
+        $this->view->assign('id', $id);
+        $this->view->assign('url', $url);
+        $this->view->assign('gdprManager', $gdprManager);
+        return $this->htmlResponse();
+    }
+    /**
      * action update
      *
      * @param \GdprExtensionsCom\GdprExtensionsComMt\Domain\Model\GdprManager $gdprManager
@@ -295,6 +423,7 @@ class GdprManagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function uploadImageAction()
     {
+        // dd('uploadImage');
         $rootPageId = (int)($_GET['rootPageId'] ?? 0);
 
         $type = ($_GET['type'] ?? '');

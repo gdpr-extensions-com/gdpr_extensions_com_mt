@@ -88,13 +88,16 @@
             <source>Background Image</source>
          </trans-unit>
          <trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color">
-            <source>Background Image Color</source>
+            <source>Background Color</source>
          </trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading_color">
+				<source>Heading Color</source>
+			</trans-unit>
          <trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description">
-            <source>Background Image Color</source>
+            <source>Background Color</source>
          </trans-unit>
          <trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color">
-            <source>Button Color</source>
+            <source>Background Color</source>
          </trans-unit>
          <trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color.description">
             <source>Button Color</source>
@@ -198,8 +201,12 @@
 			<trans-unit id="gdpr.twoclick.consent" resname="gdpr.twoclick.consent">
 				<source>GDPR 2-CLICK COOKIE CONSENT</source>
 			</trans-unit>
+			<trans-unit id="matomo.twoclick.solution" resname="matomo.twoclick.solution">
+				<source>Matomo 2-Click Solution</source>
+			</trans-unit>
 			<trans-unit id="gdpr.twoclick.consent.desc" resname="gdpr.twoclick.consent.desc">
-				<source>Third-party advertising services are used. If you agree here, personal data will be transferred to these providers.</source>
+				<source>Cookies provided by host are managed through the Matomo 2xClick solution developed by
+					gdpr-extensions.com </source>
 			</trans-unit>
 			<trans-unit id="gdpr.accept.all" resname="gdpr.accept.all">
 				<source>Accept All</source>
